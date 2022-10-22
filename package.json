@@ -1,0 +1,27 @@
+{
+  "name": "musicbot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "clear": "rm -r build | rm -r dist | rm -r assets | rm settings.json",
+    "dev": "nodemon src/server.ts",
+    "build": "rm -r build | rm -r dist | pkg src/server.ts",
+    "start": "ts-node src/server.ts"
+  },
+  "pkg": {},
+  "keywords": [],
+  "author": "NUB31",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/fs-extra": "^9.0.13",
+    "@types/node": "^18.11.3",
+    "nodemon": "^2.0.20",
+    "pkg": "^5.8.0",
+    "typescript": "^4.8.4"
+  },
+  "dependencies": {
+    "fs-extra": "^10.1.0",
+    "socket.io": "^4.5.3"
+  }
+}
