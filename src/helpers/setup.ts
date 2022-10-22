@@ -4,6 +4,8 @@ import fs from "fs-extra";
 import installCheck from "../bundledAssets/assets/installCheck.json";
 import requestPlaylist from "../bundledAssets/assets/requestPlaylist.json";
 
+const https = require("https");
+
 type SetupOptions = {
   resetList: {
     settings?: boolean;
@@ -31,6 +33,11 @@ export default async function setup(options: Partial<SetupOptions> = {}) {
       !(await fs.pathExists("assets/requestPlaylist.json"))
     )
       await resetRequestPlaylist();
+    if (
+      options?.resetList?.requestPlaylist ||
+      !(await fs.pathExists("assets/ffplay.exe"))
+    )
+      await resetFFPlay();
 
     // Static
     await fs.remove("assets/installCheck.json");
@@ -82,6 +89,20 @@ export async function resetFallbackPlaylist() {
     );
   } catch (err) {
     console.error("Something went wrong resetting the playlist. ERROR:");
+    throw err;
+  }
+}
+
+export async function resetFFPlay() {
+  try {
+    console.log("Downloading ffplay");
+    await fs.remove("assets/ffplay.exe");
+    https.get(
+      "https://github.com/NUB31/twitch_musicbot/releases/download/asset/ffplay.exe",
+      (res: any) => res.pipe(fs.createWriteStream("assets/ffplay.exe"))
+    );
+  } catch (err) {
+    console.error("Something went wrong downloading ffplay. ERROR:");
     throw err;
   }
 }
