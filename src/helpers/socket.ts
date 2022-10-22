@@ -1,5 +1,5 @@
 import { Server } from "socket.io";
-import getSettings from "./settings";
+import { getSettings } from "./config";
 import http from "http";
 
 const server = http.createServer();

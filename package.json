@@ -4,16 +4,17 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "clear": "rm -r build | rm -r dist | rm -r assets | rm settings.json",
+    "clear": "rm -r build | rm -r dist | rm -r assets | rm settings.json | rm music_artist.txt | rm music_name.txt",
+    "setup": "ts-node src/install.ts",
     "dev": "nodemon --watch src/**/*.ts -L src/server.ts",
-    "build": "rm -r build | rm -r dist | tsc && pkg build/server.js --target node16-win --out-dir dist && rm -r build",
-    "start": "ts-node src/server.ts"
+    "build": "rm -r build | rm -r dist | tsc && pkg build/server.js --target node16-win --out-dir dist && pkg build/install.js  --target node16-win --out-dir dist && rm -r build",
+    "start": "rm -r build | tsc && node build/server.js"
   },
-  "pkg": {},
   "keywords": [],
   "author": "NUB31",
   "license": "ISC",
   "devDependencies": {
+    "@types/download": "^8.0.1",
     "@types/fs-extra": "^9.0.13",
     "@types/node": "^18.11.3",
     "nodemon": "^2.0.20",
@@ -21,7 +22,13 @@
     "typescript": "^4.8.4"
   },
   "dependencies": {
+    "axios": "^0.27.2",
+    "download": "^8.0.0",
     "fs-extra": "^10.1.0",
-    "socket.io": "^4.5.3"
+    "moment": "^2.29.4",
+    "ntsuspend": "^1.0.2",
+    "socket.io": "^4.5.3",
+    "youtube-search": "^1.1.6",
+    "ytdl-core": "^4.11.2"
   }
 }

@@ -6,5 +6,7 @@
 **/playingMusic.txt
 **/dist
 **/build
-./assets
-./settings.json
+assets
+settings.json
+music_name.txt
+music_artist.txt

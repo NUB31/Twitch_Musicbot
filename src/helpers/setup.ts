@@ -1,10 +1,9 @@
 import defaultSettings from "../bundledAssets/settings.json";
+import download from "download";
 import fallbackPlaylist from "../bundledAssets/assets/fallbackPlaylist.json";
 import fs from "fs-extra";
 import installCheck from "../bundledAssets/assets/installCheck.json";
 import requestPlaylist from "../bundledAssets/assets/requestPlaylist.json";
-
-const https = require("https");
 
 type SetupOptions = {
   resetList: {
@@ -19,6 +18,9 @@ export default async function setup(options: Partial<SetupOptions> = {}) {
     // Make assets folder if it does not already exists
     if (!(await fs.pathExists("assets"))) {
       await fs.mkdir("assets");
+    }
+    if (!(await fs.pathExists("assets/music"))) {
+      await fs.mkdir("assets/music");
     }
 
     if (options?.resetList?.settings || !(await fs.pathExists("settings.json")))
@@ -38,6 +40,11 @@ export default async function setup(options: Partial<SetupOptions> = {}) {
       !(await fs.pathExists("assets/ffplay.exe"))
     )
       await resetFFPlay();
+    if (
+      options?.resetList?.requestPlaylist ||
+      !(await fs.pathExists("assets/win32-x64_lib.node"))
+    )
+      await resetFFPlayDependency();
 
     // Static
     await fs.remove("assets/installCheck.json");
@@ -97,12 +104,40 @@ export async function resetFFPlay() {
   try {
     console.log("Downloading ffplay");
     await fs.remove("assets/ffplay.exe");
-    https.get(
+    await download(
       "https://github.com/NUB31/twitch_musicbot/releases/download/asset/ffplay.exe",
-      (res: any) => res.pipe(fs.createWriteStream("assets/ffplay.exe"))
+      "assets"
     );
   } catch (err) {
     console.error("Something went wrong downloading ffplay. ERROR:");
+    throw err;
+  }
+}
+
+export async function resetFFPlayDependency() {
+  try {
+    console.log("Downloading win32-x64_lib.node");
+    await fs.remove("win32-x64_lib.node");
+    await download(
+      "https://github.com/NUB31/twitch_musicbot/releases/download/asset/win32-x64_lib.node",
+      "./"
+    );
+  } catch (err) {
+    console.error("Something went wrong downloading ffplay. ERROR:");
+    throw err;
+  }
+}
+
+export async function resetServer() {
+  try {
+    console.log("Downloading main server file");
+    await fs.remove("server.exe");
+    await download(
+      "https://github.com/NUB31/twitch_musicbot/releases/download/v0.1.0/server.exe",
+      "./"
+    );
+  } catch (err) {
+    console.error("Something went wrong the server file. ERROR:");
     throw err;
   }
 }
