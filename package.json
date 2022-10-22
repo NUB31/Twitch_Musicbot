@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "clear": "rm -r build | rm -r dist | rm -r assets | rm settings.json",
-    "dev": "nodemon src/server.ts",
-    "build": "rm -r build | rm -r dist | pkg src/server.ts",
+    "dev": "nodemon --watch src/**/*.ts -L src/server.ts",
+    "build": "rm -r build | rm -r dist | tsc && pkg build/server.js --target node16-win --out-dir dist && rm -r build",
     "start": "ts-node src/server.ts"
   },
   "pkg": {},

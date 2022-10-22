@@ -7,7 +7,6 @@ import requestPlaylist from "../bundledAssets/assets/requestPlaylist.json";
 type SetupOptions = {
   resetList: {
     settings?: boolean;
-    install?: boolean;
     requestPlaylist?: boolean;
     fallbackPlaylist?: boolean;
   };
@@ -33,6 +32,7 @@ export default async function setup(options: Partial<SetupOptions> = {}) {
     )
       await resetRequestPlaylist();
 
+    // Static
     await fs.remove("assets/installCheck.json");
     await fs.writeFile(
       "assets/installCheck.json",
@@ -44,7 +44,7 @@ export default async function setup(options: Partial<SetupOptions> = {}) {
   }
 }
 
-async function resetSettings() {
+export async function resetSettings() {
   try {
     console.log("Resetting settings");
     await fs.remove("settings.json");
@@ -58,7 +58,7 @@ async function resetSettings() {
   }
 }
 
-async function resetRequestPlaylist() {
+export async function resetRequestPlaylist() {
   try {
     console.log("Resetting request playlist");
     await fs.remove("assets/requestPlaylist.json");
@@ -72,7 +72,7 @@ async function resetRequestPlaylist() {
   }
 }
 
-async function resetFallbackPlaylist() {
+export async function resetFallbackPlaylist() {
   try {
     console.log("Resetting fallback playlist");
     await fs.remove("assets/fallbackPlaylist.json");

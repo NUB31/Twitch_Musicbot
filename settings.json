@@ -9,5 +9,6 @@
     "startPaused": false,
     "useDefaultPlaylist": true,
     "shuffleDefaultPlaylist": false,
-    "maxLength": 600
+    "maxLength": 600,
+    "serverPort": 3560
 }
