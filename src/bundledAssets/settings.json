@@ -11,10 +11,7 @@
   "shuffleDefaultPlaylist": false,
   "maxLength": 600,
   "serverPort": 3560,
+  "dashboardPort": 3550,
 
-  "TWITCH_BOT_NAME": "",
-  "TWITCH_BOT_TOKEN": "oauth:",
-  "TWITCH_USER": "",
-  "YOUTUBE_URL": "",
   "YOUTUBE_API_KEY": ""
 }

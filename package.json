@@ -27,7 +27,7 @@
     "fs-extra": "^10.1.0",
     "moment": "^2.29.4",
     "ntsuspend": "^1.0.2",
-    "socket.io": "^4.5.3",
+    "socket.io-client": "^4.5.3",
     "youtube-search": "^1.1.6",
     "ytdl-core": "^4.11.2"
   }
