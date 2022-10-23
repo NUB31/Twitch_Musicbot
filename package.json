@@ -2,7 +2,7 @@
   "name": "musicbot",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "src/server.ts",
   "scripts": {
     "clear": "rm -r build | rm -r dist | rm -r assets | rm settings.json | rm music_artist.txt | rm music_name.txt",
     "setup": "ts-node src/install.ts",
