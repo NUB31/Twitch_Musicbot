@@ -2,11 +2,9 @@
 # Keep environment variables out of version control
 **/*.env*
 **/music
-**/byLine.txt
-**/playingMusic.txt
 **/dist
 **/build
 assets
-settings.json
+/settings.json
 music_name.txt
 music_artist.txt

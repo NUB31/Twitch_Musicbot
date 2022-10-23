@@ -2,7 +2,6 @@ import defaultSettings from "../bundledAssets/settings.json";
 import download from "download";
 import fallbackPlaylist from "../bundledAssets/assets/fallbackPlaylist.json";
 import fs from "fs-extra";
-import installCheck from "../bundledAssets/assets/installCheck.json";
 import requestPlaylist from "../bundledAssets/assets/requestPlaylist.json";
 
 type SetupOptions = {
@@ -45,13 +44,6 @@ export default async function setup(options: Partial<SetupOptions> = {}) {
       !(await fs.pathExists("assets/win32-x64_lib.node"))
     )
       await resetFFPlayDependency();
-
-    // Static
-    await fs.remove("assets/installCheck.json");
-    await fs.writeFile(
-      "assets/installCheck.json",
-      JSON.stringify(installCheck, null, 4)
-    );
   } catch (err) {
     console.error("Something went wrong installing the application. ERROR:");
     throw err;
@@ -64,7 +56,7 @@ export async function resetSettings() {
     await fs.remove("settings.json");
     await fs.writeFile(
       "settings.json",
-      JSON.stringify(defaultSettings, null, 4)
+      JSON.stringify(defaultSettings, null, 2)
     );
   } catch (err) {
     console.error("Something went wrong resetting the settings. ERROR:");
@@ -78,7 +70,7 @@ export async function resetRequestPlaylist() {
     await fs.remove("assets/requestPlaylist.json");
     await fs.writeFile(
       "assets/requestPlaylist.json",
-      JSON.stringify(requestPlaylist, null, 4)
+      JSON.stringify(requestPlaylist, null, 2)
     );
   } catch (err) {
     console.error("Something went wrong resetting the playlist. ERROR:");
@@ -92,7 +84,7 @@ export async function resetFallbackPlaylist() {
     await fs.remove("assets/fallbackPlaylist.json");
     await fs.writeFile(
       "assets/fallbackPlaylist.json",
-      JSON.stringify(fallbackPlaylist, null, 4)
+      JSON.stringify(fallbackPlaylist, null, 2)
     );
   } catch (err) {
     console.error("Something went wrong resetting the playlist. ERROR:");

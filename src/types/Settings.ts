@@ -11,9 +11,7 @@ export type Settings = {
   shuffleDefaultPlaylist: boolean;
   maxLength: number;
   serverPort: number;
-  TWITCH_BOT_NAME: string;
-  TWITCH_BOT_TOKEN: string;
-  TWITCH_USER: string;
-  YOUTUBE_URL: string;
+  dashboardPort: number;
+
   YOUTUBE_API_KEY: string;
 };
