@@ -5,7 +5,7 @@
   "main": "src/server.ts",
   "scripts": {
     "clear": "rm -r build | rm -r dist | rm -r assets | rm settings.json | rm music_artist.txt | rm music_name.txt | rm server.exe | rm win32-x64_lib.node",
-    "setup": "ts-node src/install.ts",
+    "setup": "cp src/bundledAssets/* ./",
     "dev": "nodemon --watch src/**/*.ts -L src/server.ts",
     "build": "rm -r build | rm -r dist | npx ncc build src/server.ts -o build/server && npx pkg build/server/index.js --target node18-win --out-dir dist/server && mv dist/server/index.exe dist/server/server.exe | npx ncc build src/install.ts -o build/installer && npx pkg build/installer/index.js --target node18-win --out-dir dist/installer && mv dist/installer/index.exe dist/installer/installer.exe | rm -r build"
   },
