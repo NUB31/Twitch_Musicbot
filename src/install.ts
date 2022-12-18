@@ -64,7 +64,6 @@ async function resetFallbackPlaylist() {
 async function resetFFPlay() {
   try {
     console.log("Downloading ffplay");
-    await fs.remove("assets/ffplay.exe");
     await download(
       "https://github.com/NUB31/twitch_musicbot/releases/download/asset/ffplay.exe",
       path + "\\assets"
