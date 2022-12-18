@@ -4,15 +4,12 @@ import fallbackPlaylist from "./bundledAssets/assets/fallbackPlaylist.json";
 import fs from "fs-extra";
 import requestPlaylist from "./bundledAssets/assets/requestPlaylist.json";
 
+const path = process.env.APPDATA + "\\nub31\\stream\\musicbot";
+
 async function setup() {
   try {
-    // Make assets folder if it does not already exists
-    if (!(await fs.pathExists("assets"))) {
-      await fs.mkdir("assets");
-    }
-    if (!(await fs.pathExists("assets/music"))) {
-      await fs.mkdir("assets/music");
-    }
+    await fs.mkdirs(path);
+    await fs.mkdirs(path + "\\assets\\music");
     await resetSettings();
     await resetFallbackPlaylist();
     await resetRequestPlaylist();
@@ -27,10 +24,9 @@ async function setup() {
 
 async function resetSettings() {
   try {
-    console.log("Resetting settings");
-    await fs.remove("settings.json");
+    console.log("Creating settings file");
     await fs.writeFile(
-      "settings.json",
+      path + "\\settings.json",
       JSON.stringify(defaultSettings, null, 2)
     );
   } catch (err) {
@@ -41,10 +37,9 @@ async function resetSettings() {
 
 async function resetRequestPlaylist() {
   try {
-    console.log("Resetting request playlist");
-    await fs.remove("assets/requestPlaylist.json");
+    console.log("Creating request playlist");
     await fs.writeFile(
-      "assets/requestPlaylist.json",
+      path + "\\assets\\requestPlaylist.json",
       JSON.stringify(requestPlaylist, null, 2)
     );
   } catch (err) {
@@ -55,10 +50,9 @@ async function resetRequestPlaylist() {
 
 async function resetFallbackPlaylist() {
   try {
-    console.log("Resetting fallback playlist");
-    await fs.remove("assets/fallbackPlaylist.json");
+    console.log("Creating fallback playlist");
     await fs.writeFile(
-      "assets/fallbackPlaylist.json",
+      path + "\\assets\\fallbackPlaylist.json",
       JSON.stringify(fallbackPlaylist, null, 2)
     );
   } catch (err) {
@@ -73,7 +67,7 @@ async function resetFFPlay() {
     await fs.remove("assets/ffplay.exe");
     await download(
       "https://github.com/NUB31/twitch_musicbot/releases/download/asset/ffplay.exe",
-      "assets"
+      path + "\\assets"
     );
   } catch (err) {
     console.error("Something went wrong downloading ffplay. ERROR:");
@@ -87,7 +81,7 @@ async function resetFFPlayDependency() {
     await fs.remove("win32-x64_lib.node");
     await download(
       "https://github.com/NUB31/twitch_musicbot/releases/download/asset/win32-x64_lib.node",
-      "./"
+      path
     );
   } catch (err) {
     console.error("Something went wrong downloading ffplay. ERROR:");
@@ -101,7 +95,7 @@ async function resetServer() {
     await fs.remove("server.exe");
     await download(
       "https://github.com/nub31/twitch_musicbot/releases/latest/download/server.exe",
-      "./"
+      path
     );
   } catch (err) {
     console.error("Something went wrong the server file. ERROR:");
